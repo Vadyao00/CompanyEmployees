@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Repository;
+﻿using Repository;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 
