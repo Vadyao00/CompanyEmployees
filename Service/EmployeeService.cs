@@ -46,5 +46,20 @@ namespace Service
 
             return employeeDto;
         }
+
+        public EmployeeDto CreateEmployeeForCompany(Guid companyId, EmployeeForCreationDto employeeForCreation, bool trackChanges)
+        {
+            var company = _repositoryManager.Company.GetCompany(companyId, trackChanges);
+            if(company is null)
+                throw new CompanyNotFoundException(companyId);
+
+            var employee = _mapper.Map<Employee>(employeeForCreation);
+
+            _repositoryManager.Employee.CreateEmployeeForCompany(companyId, employee);
+            _repositoryManager.Save();
+
+            var employeeToReturn = _mapper.Map<EmployeeDto>(employee);
+            return employeeToReturn;
+        }
     }
 }
