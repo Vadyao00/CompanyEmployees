@@ -6,6 +6,7 @@ namespace Filters.ActionFilters
     {
         public ValidationFilterAttribute()
         { }
+
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var action = context.RouteData.Values["action"];
@@ -20,6 +21,7 @@ namespace Filters.ActionFilters
             if (!context.ModelState.IsValid)
                 context.Result = new UnprocessableEntityObjectResult(context.ModelState);
         }
-            public void OnActionExecuted(ActionExecutedContext context) { }
+
+        public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }
