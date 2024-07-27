@@ -50,6 +50,7 @@ namespace CompanyEmployees
               .AddCustomCSVFormatter()
               .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
             builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+            builder.Services.ConfigureVersioning();
 
             var app = builder.Build();
 
