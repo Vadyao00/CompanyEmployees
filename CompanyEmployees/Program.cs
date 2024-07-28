@@ -59,6 +59,9 @@ namespace CompanyEmployees
             builder.Services.AddMemoryCache();
             builder.Services.ConfigureRateLimitOptions();
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
+            builder.Services.ConfigureJWT(builder.Configuration);
 
             var app = builder.Build();
 
@@ -82,6 +85,7 @@ namespace CompanyEmployees
             app.UseResponseCaching();
             app.UseHttpCacheHeaders();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
