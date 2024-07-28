@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Filters.ActionFilters;
 using Service.DataShaping;
 using Shared.DataTransferObjects;
+using AspNetCoreRateLimit;
 
 namespace CompanyEmployees
 {
@@ -55,6 +56,9 @@ namespace CompanyEmployees
             builder.Services.ConfigureVersioning();
             builder.Services.ConfigureResponseCaching();
             builder.Services.ConfigureHttpCacheHeaders();
+            builder.Services.AddMemoryCache();
+            builder.Services.ConfigureRateLimitOptions();
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
@@ -73,6 +77,7 @@ namespace CompanyEmployees
                 ForwardedHeaders = ForwardedHeaders.All
             });
 
+            app.UseIpRateLimiting();
             app.UseCors("CorsPolicy");
             app.UseResponseCaching();
             app.UseHttpCacheHeaders();
